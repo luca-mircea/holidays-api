@@ -4,10 +4,10 @@ IRL I'd be more critical with my tests. I would test above all
 for the data types to ensure they comply with the columns in the tables
 """
 
-
 import unittest
-import pandas as pd
 from datetime import datetime
+
+import pandas as pd
 
 # Assuming the function is defined in a module named `data_processing_module`
 from src.transform_data import process_data_from_api
@@ -27,7 +27,7 @@ class TestProcessDataFromApi(unittest.TestCase):
             "weekday_date_name": ["Sunday", "Monday"],
             "weekday_date_numeric": [0, 1],
             "weekday_observed_name": ["Sunday", "Tuesday"],
-            "weekday_observed_numeric": [0, 2]
+            "weekday_observed_numeric": [0, 2],
         }
         # we could add more edge cases if any
 
@@ -40,18 +40,36 @@ class TestProcessDataFromApi(unittest.TestCase):
         self.assertIsInstance(result_df, pd.DataFrame)
 
         # Check if the 'public' column is converted to integers
-        self.assertTrue(sum([True if value in [0, 1] else False for value in result_df["public"]]) == 3)
+        self.assertTrue(
+            sum([True if value in [0, 1] else False for value in result_df["public"]])
+            == 3
+        )
 
         # Check if the date columns are converted to Unix timestamps
-        self.assertEqual(result_df["date_unix"].iloc[0], int(datetime.strptime("2023-01-01", "%Y-%m-%d").timestamp()))
-        self.assertEqual(result_df["observed_unix"].iloc[1], int(datetime.strptime("2023-01-01", "%Y-%m-%d").timestamp()))
+        self.assertEqual(
+            result_df["date_unix"].iloc[0],
+            int(datetime.strptime("2023-01-01", "%Y-%m-%d").timestamp()),
+        )
+        self.assertEqual(
+            result_df["observed_unix"].iloc[1],
+            int(datetime.strptime("2023-01-01", "%Y-%m-%d").timestamp()),
+        )
 
         # Check if the columns are rearranged correctly
         expected_columns = [
-            "uuid", "name", "date_string", "date_unix", "observed_string",
-            "observed_unix", "public", "country", "subdivisions",
-            "weekday_date_name", "weekday_date_numeric",
-            "weekday_observed_name", "weekday_observed_numeric"
+            "uuid",
+            "name",
+            "date_string",
+            "date_unix",
+            "observed_string",
+            "observed_unix",
+            "public",
+            "country",
+            "subdivisions",
+            "weekday_date_name",
+            "weekday_date_numeric",
+            "weekday_observed_name",
+            "weekday_observed_numeric",
         ]
         self.assertListEqual(list(result_df.columns), expected_columns)
 
@@ -62,5 +80,5 @@ class TestProcessDataFromApi(unittest.TestCase):
         # note: ChatGPT is seriously amazing for unit tests
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
