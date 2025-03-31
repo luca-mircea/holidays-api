@@ -8,7 +8,8 @@ import sqlite3
 
 import pandas as pd
 
-from extract_data_from_api import get_data_from_local, get_holiday_data_from_api
+from extract_data_from_api import (get_data_from_local,
+                                   get_holiday_data_from_api)
 from transform_data import process_data_from_api
 
 
