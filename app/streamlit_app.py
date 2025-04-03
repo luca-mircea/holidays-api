@@ -24,7 +24,7 @@ def main():
     user_input = st.text_input(
         "Please write your query below",
         value="SELECT * FROM locations",
-        placeholder="Type your query here..."
+        placeholder="Type your query here...",
     )
 
     if st.button("Run Query"):
@@ -35,13 +35,12 @@ def main():
                 st.dataframe(result)
             else:
                 raise BadInput(
-                    "The query you submitted could "
-                    "not be executed. Please try again"
+                    "The query you submitted could " "not be executed. Please try again"
                 )
         except Exception as e:
             # normally we'd catch each possible exception individually
             print(f"Your query could not be run. The error was: \n\n{e}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

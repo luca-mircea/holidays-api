@@ -11,7 +11,9 @@ class DBFailure(Exception):
     pass
 
 
-def execute_query(query: str, conn: sqlite3.Connection = sqlite3.connect(":memory:")) -> pd.DataFrame:
+def execute_query(
+    query: str, conn: sqlite3.Connection = sqlite3.connect(":memory:")
+) -> pd.DataFrame:
     """Execute query against the connection"""
 
     cursor = conn.cursor()

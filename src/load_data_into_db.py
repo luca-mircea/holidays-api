@@ -17,8 +17,8 @@ class WrongLoadMode(Exception):
 
 
 def load_data_into_db(
-        conn: sqlite3.Connection = sqlite3.connect(":memory:"),
-        mode: str = "local") -> None:
+    conn: sqlite3.Connection = sqlite3.connect(":memory:"), mode: str = "local"
+) -> None:
     """Load df into DB"""
     if mode == "api":
         holidays = get_holiday_data_from_api()
