@@ -11,6 +11,7 @@ python-holidayapi = "*"
 isort = "*"
 black = "*"
 pytest = "*"
+streamlit = "*"
 
 [dev-packages]
 

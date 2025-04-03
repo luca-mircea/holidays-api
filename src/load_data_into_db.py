@@ -16,7 +16,9 @@ class WrongLoadMode(Exception):
     pass
 
 
-def load_data_into_db(mode: bool = "local") -> None:
+def load_data_into_db(
+    conn: sqlite3.Connection = sqlite3.connect(":memory:"), mode: str = "local"
+) -> None:
     """Load df into DB"""
     if mode == "api":
         holidays = get_holiday_data_from_api()
@@ -28,8 +30,6 @@ def load_data_into_db(mode: bool = "local") -> None:
     holidays_df = process_data_from_api(holidays)
     locations_df = pd.read_csv("../stored_data/locations.csv")
 
-    # note: normally client instantiated outside, passed as argument
-    conn = sqlite3.connect(":memory:")
     cursor = conn.cursor()
 
     # note: the uuid is not unique/a primary key
