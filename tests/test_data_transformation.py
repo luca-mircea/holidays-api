@@ -10,7 +10,7 @@ from datetime import datetime
 import pandas as pd
 
 # Assuming the function is defined in a module named `data_processing_module`
-from src.transform_data import process_data_from_api
+from app.src.transform_data import process_data_from_api
 
 
 class TestProcessDataFromApi(unittest.TestCase):
@@ -23,7 +23,7 @@ class TestProcessDataFromApi(unittest.TestCase):
             "observed": ["2023-01-01", "2023-01-03"],
             "public": [True, False],
             "country": ["US", "CA"],
-            "subdivisions": [["NY", "NJ"], ["ON"]],
+            "subdivisions": ['["NY", "NJ"]', '["ON"]'],
             "weekday_date_name": ["Sunday", "Monday"],
             "weekday_date_numeric": [0, 1],
             "weekday_observed_name": ["Sunday", "Tuesday"],

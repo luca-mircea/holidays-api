@@ -2,6 +2,7 @@
 Here we keep the function for transforming the data from the API
 """
 
+import ast
 from datetime import datetime
 
 import pandas as pd
@@ -55,7 +56,10 @@ def process_data_from_api(data: pd.DataFrame) -> pd.DataFrame:
     # this is because of sqllite, but real life databases
     # like BigQuery support joining with/ checking in an array
 
-    data = data.explode("subdivisions")
+    data["subdivisions"] = [
+        ast.literal_eval(list_as_str) for list_as_str in data["subdivisions"]
+    ]
+    data = data.explode("subdivisions", ignore_index=True)
 
     # note to self: not sure yet what to do with NaN,
     # it depends on the logic of the eventual query

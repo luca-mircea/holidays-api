@@ -4,12 +4,10 @@ that we can then use to "query" from the outside after we dockerize
 this project in order to mimmick querying a database
 """
 
-import sqlite3
-
+import duckdb
 import pandas as pd
-
-from extract_data_from_api import get_data_from_local, get_holiday_data_from_api
-from transform_data import process_data_from_api
+from src.extract_data_from_api import get_data_from_local, get_holiday_data_from_api
+from src.transform_data import process_data_from_api
 
 
 class WrongLoadMode(Exception):
@@ -17,7 +15,7 @@ class WrongLoadMode(Exception):
 
 
 def load_data_into_db(
-    conn: sqlite3.Connection = sqlite3.connect(":memory:"), mode: str = "local"
+    conn: duckdb.DuckDBPyConnection = duckdb.connect(":memory:"), mode: str = "local"
 ) -> None:
     """Load df into DB"""
     if mode == "api":
@@ -28,31 +26,14 @@ def load_data_into_db(
         raise WrongLoadMode("mode has to be 'api' or 'local'")
 
     holidays_df = process_data_from_api(holidays)
-    locations_df = pd.read_csv("../stored_data/locations.csv")
-
-    cursor = conn.cursor()
+    locations_df = pd.read_csv("./src/stored_data/locations.csv")
 
     # note: the uuid is not unique/a primary key
     # unique values should be checked for the uuid X subdivision combination
     # or alternatively by name/date_string X subdivision combo
 
     # load into table
-    holidays_df.to_sql("holidays", conn, if_exists="replace", index=False)
-    conn.commit()
+    conn.execute("CREATE TABLE holidays AS SELECT * FROM holidays_df")
 
     # also load the locations table
-    locations_df.to_sql("locations", conn, if_exists="replace", index=False)
-    conn.commit()
-
-    # query example
-    cursor.execute("SELECT * FROM holidays")
-    rows = cursor.fetchall()
-
-    for row in rows:
-        print(row)
-
-    cursor.execute("SELECT * FROM locations")
-    rows = cursor.fetchall()
-
-    for row in rows:
-        print(row)
+    conn.execute("CREATE TABLE locations AS SELECT * FROM locations_df")
