@@ -23,7 +23,7 @@ class TestProcessDataFromApi(unittest.TestCase):
             "observed": ["2023-01-01", "2023-01-03"],
             "public": [True, False],
             "country": ["US", "CA"],
-            "subdivisions": [["NY", "NJ"], ["ON"]],
+            "subdivisions": ['["NY", "NJ"]', '["ON"]'],
             "weekday_date_name": ["Sunday", "Monday"],
             "weekday_date_numeric": [0, 1],
             "weekday_observed_name": ["Sunday", "Tuesday"],
