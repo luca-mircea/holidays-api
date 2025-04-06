@@ -5,9 +5,7 @@ this project in order to mimmick querying a database
 """
 
 import duckdb
-
 import pandas as pd
-
 from src.extract_data_from_api import get_data_from_local, get_holiday_data_from_api
 from src.transform_data import process_data_from_api
 
@@ -17,8 +15,7 @@ class WrongLoadMode(Exception):
 
 
 def load_data_into_db(
-    conn: duckdb.DuckDBPyConnection = duckdb.connect(":memory:"),
-    mode: str = "local"
+    conn: duckdb.DuckDBPyConnection = duckdb.connect(":memory:"), mode: str = "local"
 ) -> None:
     """Load df into DB"""
     if mode == "api":

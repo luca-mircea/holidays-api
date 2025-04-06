@@ -21,7 +21,6 @@ having a lean build or if I wanted super high performance
 
 import holidayapi
 import pandas as pd
-
 from src.constants import API_KEY, COUNTRIES, YEAR
 
 

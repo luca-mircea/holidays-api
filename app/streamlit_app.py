@@ -45,7 +45,7 @@ def main():
         "Please write your query below",
         value=default_query,
         placeholder="Type your query here...",
-        height=300
+        height=300,
     )
 
     if st.button("Run Query"):
