@@ -10,7 +10,7 @@ from datetime import datetime
 import pandas as pd
 
 # Assuming the function is defined in a module named `data_processing_module`
-from src.transform_data import process_data_from_api
+from app.src.transform_data import process_data_from_api
 
 
 class TestProcessDataFromApi(unittest.TestCase):

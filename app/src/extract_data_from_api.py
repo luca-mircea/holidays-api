@@ -65,6 +65,6 @@ def get_holiday_data_from_api() -> pd.DataFrame:
 
 def get_data_from_local() -> pd.DataFrame:
     """Also keep a copy locally since small & quota, useful for tests"""
-    holidays_df = pd.read_csv("../stored_data/holidays.csv")
+    holidays_df = pd.read_csv("./src/stored_data/holidays.csv")
 
     return holidays_df

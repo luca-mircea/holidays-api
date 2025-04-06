@@ -12,6 +12,7 @@ isort = "*"
 black = "*"
 pytest = "*"
 streamlit = "*"
+duckdb = "*"
 
 [dev-packages]
 

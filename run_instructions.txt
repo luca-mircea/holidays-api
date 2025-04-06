@@ -1,0 +1,2 @@
+docker build . -t luca_mircea_db
+docker run -p 8501:8501 luca_mircea_db
